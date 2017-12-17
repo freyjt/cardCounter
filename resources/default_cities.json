@@ -1,0 +1,47 @@
+[
+  {
+    "city": "New York",
+    "symbol":"NY",
+    "quantity": 3
+  },
+  {
+    "city": "Washington",
+    "symbol": "WA",
+    "quantity": 3
+  },
+  {
+    "city": "London",
+    "symbol": "LO",
+    "quantity": 3
+  },
+  {
+    "city": "Cairo",
+    "symbol": "CA",
+    "quantity": 3
+  },
+  {
+    "city": "Istanbul",
+    "symbol": "IS",
+    "quantity": 3
+  },
+  {
+    "city": "Tripoli",
+    "symbol": "TR",
+    "quantity": 3
+  },
+  {
+    "city": "Sao Paulo",
+    "symbol": "SP",
+    "quantity": 3
+  },
+  {
+    "city": "Lagos",
+    "symbol": "LG",
+    "quantity": 3
+  },
+  {
+    "city": "Jacksonville",
+    "symbol": "JA",
+    "quantity": 3
+  }
+]
