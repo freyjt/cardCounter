@@ -2,6 +2,7 @@
 
 class View
   # return menu choice
+  # @TODO can this menu be data-driven? I think it can.
   def menu( )
      puts "--------------------------"
      puts " 1 - draw cards"
@@ -9,7 +10,7 @@ class View
      puts " 3 - epidemic"
      puts " 4 - add or adjust cities"
      puts ""
-     return gets.chomp
+     return line_input
   end
 
 
@@ -25,7 +26,8 @@ class View
       show_cities_in_deck(cities)
       epidemic_city = get_input()
       # @TODO SHOULD THIS INPUT BE TOKENIZED OR NORMAL
-      if(city_symbols.include?(epidemic_city) return epidemic_city
+      if(city_symbols.include? epidemic_city)
+        return epidemic_city
       else
         put "Invalid input "
         fail_counter += 1
@@ -45,5 +47,7 @@ class View
 
   end
 
-  def get_input
+  def line_input
+    return gets.chomp
+  end
 end
