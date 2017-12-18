@@ -1,21 +1,21 @@
 [
-  { "displayToken": 1,
-    "displayOption": "draw card",
-    "callToken": "draw"
+  { "displayToken": "1",
+    "displayOption": "draw cards",
+    "callToken": "drawCard"
   },
-  { "displayToken": 2,
+  { "displayToken": "2",
     "displayOption": "print probabilities",
     "callToken": "printProbs"
   },
-  { "displayToken": 3,
+  { "displayToken": "3",
     "displayOption": "Epidemic",
     "callToken": "resolveEpidemic"
   },
-  { "displayToken": 4,
+  { "displayToken": "4",
     "displayOption": "Add or Adjust Cities",
     "callToken": "changeCityModel"
   },
-  { "displayToken": 5,
+  { "displayToken": "5",
     "displayOption": "Exit",
     "callToken": "exitSafely"
   }

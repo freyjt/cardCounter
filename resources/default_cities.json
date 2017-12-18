@@ -1,47 +1,47 @@
 [
   {
-    "city": "New York",
-    "symbol":"NY",
+    "displayOption": "New York",
+    "displayToken":"NY",
     "quantity": 3
   },
   {
-    "city": "Washington",
-    "symbol": "WA",
+    "displayOption": "Washington",
+    "displayToken": "WA",
     "quantity": 3
   },
   {
-    "city": "London",
-    "symbol": "LO",
+    "displayOption": "London",
+    "displayToken": "LO",
     "quantity": 3
   },
   {
-    "city": "Cairo",
-    "symbol": "CA",
+    "displayOption": "Cairo",
+    "displayToken": "CA",
     "quantity": 3
   },
   {
-    "city": "Istanbul",
-    "symbol": "IS",
+    "displayOption": "Istanbul",
+    "displayToken": "IS",
     "quantity": 3
   },
   {
-    "city": "Tripoli",
-    "symbol": "TR",
+    "displayOption": "Tripoli",
+    "displayToken": "TR",
     "quantity": 3
   },
   {
-    "city": "Sao Paulo",
-    "symbol": "SP",
+    "displayOption": "Sao Paulo",
+    "displayToken": "SP",
     "quantity": 3
   },
   {
-    "city": "Lagos",
-    "symbol": "LG",
+    "displayOption": "Lagos",
+    "displayToken": "LG",
     "quantity": 3
   },
   {
-    "city": "Jacksonville",
-    "symbol": "JA",
+    "displayOption": "Jacksonville",
+    "displayToken": "JA",
     "quantity": 3
   }
 ]
