@@ -1,0 +1,22 @@
+[
+  { "displayToken": 1,
+    "displayOption": "draw card",
+    "callToken": "draw"
+  },
+  { "displayToken": 2,
+    "displayOption": "print probabilities",
+    "callToken": "printProbs"
+  },
+  { "displayToken": 3,
+    "displayOption": "Epidemic",
+    "callToken": "resolveEpidemic"
+  },
+  { "displayToken": 4,
+    "displayOption": "Add or Adjust Cities",
+    "callToken": "changeCityModel"
+  },
+  { "displayToken": 5,
+    "displayOption": "Exit",
+    "callToken": "exitSafely"
+  }
+]

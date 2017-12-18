@@ -1,53 +1,48 @@
 
 
 class View
+  
+  def initialize(message_path)
+    @display_messages = JSON.parse(File.read(message_path))
+  end
+
   # return menu choice
-  # @TODO can this menu be data-driven? I think it can.
-  def menu( )
-     puts "--------------------------"
-     puts " 1 - draw cards"
-     puts " 2 - print probabilities"
-     puts " 3 - epidemic"
-     puts " 4 - add or adjust cities"
-     puts ""
-     return line_input
-  end
-
-
-  def show_probabilities(probs)
-
-  end
-
-
-  def epidemic_input(cities)
-    city_symbols = cities.map { |city| city.symbols } 
+  # call with menu items to get menu
+  # call with cities in deck for 'epidemic'
+  # call with cities on top for normal draw
+  def menu(menu_hash, choice_descriptor = "menu option")
     fail_counter = 0
+    menu_symbols = menu_hash.map { |item| item["displayToken"] } # @TODO Law of demeter violation. Hand it what it expects, call #keys
+    menu_k_v = menu_hash.map { |item| [ "#{item["displayToken"]}", "#{item["displayOption"]}" ] } # @TODO Law of demeter violation. Hand it what it expects
     while(true)
-      show_cities_in_deck(cities)
-      epidemic_city = get_input()
-      # @TODO SHOULD THIS INPUT BE TOKENIZED OR NORMAL
-      if(city_symbols.include? epidemic_city)
-        return epidemic_city
+      display_hash(menu_k_v) 
+      token_input = line_input("#{@display_messages["ENTER_DATA"]} #{choice_descriptor}")
+      if(menu_symbols.include? token_input)
+        return token_input
       else
-        put "Invalid input "
+        puts @display_messages["INCORRECT_INPUT"]
         fail_counter += 1
         if(fail_counter >= 3)
-          puts "returning none"
+          puts @display_messages["GIVING_UP"]
           return ""
         end
-        puts "try again"
       end
     end
   end
 
-  private
-
-  def show_cities_in_deck(cities)
-
-
+  # dataIn should be an array of k->v pairs
+  def display_hash(dataIn)
+    puts @display_messages["MENU_SEPARATOR"]
+    dataIn.each do |key, value|
+      puts "#{key} - #{value}"
+    end
+    puts @display_messages["MENU_SEPARATOR"]
   end
 
-  def line_input
+  private
+
+  def line_input(request)
+    puts request
     return gets.chomp
   end
 end
