@@ -12,7 +12,9 @@ def main
   #  When one object empties, it pops off the array
   #  When in between objects, display both guarantees and possibilities
   def drawCard()
-    # determine possible draws
+    # determine possible draws ... Not convinced the deck should do this, maybe another class
+    #  it needs to know the deck, but also how many draws.
+    #  so maybe. get deck, determine draws, remove card, iterate.
     possible_draws = @deck_builder.possible_draws() 
     # display probabilities
     card_drawn = @view.menu(possible_draws)
@@ -35,7 +37,7 @@ def main
     raise ArgumentError("Something didn't check right, sorry.")
   end
 
-  @deckbuilder = DeckBuilder.new()
+  @deckbuilder = DeckBuilder.new CITY_PATH
   @view = View.new VIEW_DISPLAY_PATH
   main_menu = JSON.parse(File.read(MENU_PATH))
   while(true)
