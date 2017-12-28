@@ -25,18 +25,19 @@ describe DeckBuilder do
   end
 
   before(:each) do
-    @deck_builder = DeckBuilder.new(PATH_TO_DEFAULT)
+    json_string = File.read(PATH_TO_DEFAULT)
+    deck_list = JsonCollapser.new.decollapse(json_string)
+    @deck_builder = DeckBuilder.new(deck_list)
   end
 
   it "#read_from_file returns array of 1 element for each card in deck" do
-    default_deck = @deck_builder.load_from_file(PATH_TO_DEFAULT)
-    expect(default_deck.length).to eq(DEFAULT_DECK_SIZE) # starting size of pandemic legacy season 2
+    expect(@deck_builder.length).to eq(DEFAULT_DECK_SIZE) # starting size of pandemic legacy season 2
   end
 
   it "#read_from_file default includes object NY" do
-    default_deck = @deck_builder.load_from_file(PATH_TO_DEFAULT)
-    expect(default_deck).to include(NY_OBJECT)
-    
+    expect(@deck_builder.top_deck_spy).to include(NY_OBJECT)
+    expect(@deck_builder.bottom_deck_spy).to include(NY_OBJECT)
+    expect(@deck_builder.full_deck_spy[0]).to include(NY_OBJECT)
   end
 
   it "#move_to_discard increases discard by 1" do

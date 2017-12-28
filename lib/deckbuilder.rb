@@ -1,29 +1,8 @@
-
+# @TODO this is not a builder, but you named it as though it were.
 class DeckBuilder
-  def initialize(path_to_deck)
-    @initial_deck = load_from_file(path_to_deck)
-    @deck = [@initial_deck]
+  def initialize(initial_deck)
+    @deck = [initial_deck]
     @discard = []
-  end
-
-  # @TODO move to DAO, pass in json
-  def load_from_file(path_to_deck)
-    # One entry per card, this makes removal easier
-    temp_deck = JSON.parse(File.read(path_to_deck))
-    out_deck = []
-    temp_deck.each do |card|
-      trimmed_card = card.clone
-      trimmed_card.delete("quantity")
-      quantity = card["quantity"].to_i
-      quantity.times { out_deck.push(trimmed_card.clone) }
-    end
-    out_deck
-  end
-
-  # @TODO move to DAO, add toJson method
-  def save(pathToFile) 
-    #Collapse changes and save as json.
-    # build a json collapser
   end
 
   def possible_draws_grouped(number_of_draws)
@@ -81,11 +60,15 @@ class DeckBuilder
     @deck.clone
   end
 
+  def length
+    return deck_length
+  end
+
   private
 
   def delete_first(deck, item_token)
     deck.each_with_index do |deck_item, i|
-      return deck.delete_at(i) if(deck_item["displayToken"] == item_token)
+      return deck.delete_at(i) if(deck_item[Label::DISPLAY_TOKEN] == item_token)
     end
     raise CardCounterError::TokenNotFound.new("Attempted to remove #{item_token} did not discover it in deck array")
   end
