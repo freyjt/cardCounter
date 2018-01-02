@@ -33,9 +33,8 @@ class JsonCollapser
   def collapse_maintaining_groups(array_of_decks)
     out_array = []
     array_of_decks.each do |deck|
-      out_array.push collapse_complete deck
+      out_array.push collapse_complete(deck)
     end
     out_array
   end
-
 end

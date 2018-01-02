@@ -37,6 +37,17 @@ describe JsonCollapser do
   it "#collapse_maintaining_groups leaves the deck size as 1 when given a standard deck array" do
     deck_to_collapse = DeckBuilder.new(@deck_array).full_deck_spy
     collapsed_deck = @jsonCollapser.collapse_maintaining_groups deck_to_collapse
+    expect(collapsed_deck.length).to eq(1)
   end
 
+  it "#collaps_maintaining_groups leaves the deck size as 2 when a deck has has draws and restacks" do
+    deck_to_build = DeckBuilder.new(@deck_array)
+    deck_to_build.move_to_discard("NY")
+    deck_to_build.move_to_discard("SP")
+    deck_to_build.move_to_discard("SP")
+    deck_to_build.add_discard_to_deck
+    deck_to_collapse = deck_to_build.full_deck_spy
+    collapsed_deck = @jsonCollapser.collapse_maintaining_groups deck_to_collapse
+    expect(collapsed_deck.length).to eq(2)
+  end
 end
