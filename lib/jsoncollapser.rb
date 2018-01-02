@@ -1,7 +1,4 @@
 class JsonCollapser
-  # @TODO move these to a module
-  TOKEN_LABEL = "displayToken"
-
   def decollapse(json_string)
     # One entry per card, this makes removal easier
     temp_deck = JSON.parse(json_string)
@@ -33,8 +30,12 @@ class JsonCollapser
      out_deck
   end
 
-  private
-
-
+  def collapse_maintaining_groups(array_of_decks)
+    out_array = []
+    array_of_decks.each do |deck|
+      out_array.push collapse_complete deck
+    end
+    out_array
+  end
 
 end
