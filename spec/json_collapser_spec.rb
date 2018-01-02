@@ -10,6 +10,12 @@ describe JsonCollapser do
   DEFAULT_DECK_UNIQUE_LENGTH = 9
   DEFAULT_DECK_ALL_ITEMS_COUNT = 3
 
+  def find_card_in(deck, token)
+    deck.each do |card|
+      return card  if(card[Label::DISPLAY_TOKEN] == token)
+    end
+  end
+
   before(:each) do
     @jsonCollapser = JsonCollapser.new()
     @deck_array = @jsonCollapser.decollapse File.read(PATH_TO_DEFAULT)
@@ -40,7 +46,7 @@ describe JsonCollapser do
     expect(collapsed_deck.length).to eq(1)
   end
 
-  it "#collaps_maintaining_groups leaves the deck size as 2 when a deck has has draws and restacks" do
+  it "#collapse_maintaining_groups leaves the deck size as 2 when a deck has has draws and restacks" do
     deck_to_build = DeckBuilder.new(@deck_array)
     deck_to_build.move_to_discard("NY")
     deck_to_build.move_to_discard("SP")
@@ -50,4 +56,21 @@ describe JsonCollapser do
     collapsed_deck = @jsonCollapser.collapse_maintaining_groups deck_to_collapse
     expect(collapsed_deck.length).to eq(2)
   end
+
+  it "#collapse_maintaining_groups has the correct number of SP when two are on top" do
+    token_expected_twice = "SP"
+    deck_to_build = DeckBuilder.new(@deck_array)
+    deck_to_build.move_to_discard("NY")
+    deck_to_build.move_to_discard(token_expected_twice)
+    deck_to_build.move_to_discard(token_expected_twice)
+    deck_to_build.add_discard_to_deck
+    deck_to_collapse = deck_to_build.full_deck_spy
+    collapsed_deck = @jsonCollapser.collapse_maintaining_groups deck_to_collapse
+    card_expected_twice = find_card_in(collapsed_deck.last, token_expected_twice)
+    expect(card_expected_twice[Label::QUANTITY]).to eq(2)
+  end
+
+
+
+
 end
