@@ -5,14 +5,13 @@ require_relative '../env.rb'
 
 describe JsonCollapser do
 
-  PATH_TO_DEFAULT = "./resources/default_cities.json"
   DEFAULT_DECK_LENGTH = 27
   DEFAULT_DECK_UNIQUE_LENGTH = 9
   DEFAULT_DECK_ALL_ITEMS_COUNT = 3
 
   def find_card_in(deck, token)
     deck.each do |card|
-      return card  if(card[Label::DISPLAY_TOKEN] == token)
+      return card if(card[Label::DISPLAY_TOKEN] == token)
     end
   end
 
@@ -69,8 +68,5 @@ describe JsonCollapser do
     card_expected_twice = find_card_in(collapsed_deck.last, token_expected_twice)
     expect(card_expected_twice[Label::QUANTITY]).to eq(2)
   end
-
-
-
 
 end

@@ -2,10 +2,8 @@ require 'rspec'
 require 'spec_helper'
 require_relative '../env.rb'
 
-
 describe DeckBuilder do
 
-  PATH_TO_DEFAULT = "./resources/default_cities.json"
   DEFAULT_DECK_SIZE = 27
   NY_OBJECT = { Label::DISPLAY_OPTION => "New York", Label::DISPLAY_TOKEN => "NY" }
 

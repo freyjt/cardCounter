@@ -1,7 +1,8 @@
 # @TODO this is not a builder, but you named it as though it were.
 class DeckBuilder
   def initialize(initial_deck)
-    @deck = [initial_deck]
+    # @TODO raise error if this does not get a deck object
+    @deck = [initial_deck.clone]
     @discard = []
   end
 
