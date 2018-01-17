@@ -20,6 +20,16 @@ class ProbDecorator
     end
   end
 
+  def decorate_at_least(draws=0, at_least=0) 
+    draw_index = label_at_least(draws, at_least)
+    @deck.reverse.each do |sub_deck|
+      sub_deck_count = count_deck(sub_deck)
+      sub_deck.each do |card|
+        card[draw_index] = 0.0
+      end
+    end
+  end
+
   def full_deck
     return @deck
   end
@@ -83,4 +93,7 @@ class ProbDecorator
     new_card
   end
 
+  def label_at_least(draws, at_least)
+    "" + Label::DRAW_PROB_PREFIX + draws.to_s + Label::DRAW_AT_LEAST_MIDFIX + at_least.to_s
+  end
 end

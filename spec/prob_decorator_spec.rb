@@ -25,6 +25,10 @@ describe ProbDecorator do
     JsonCollapser.new.collapse_maintaining_groups @deck.full_deck_spy
   end
 
+  def label_at_least(draws, at_least)
+    "" + Label::DRAW_PROB_PREFIX + draws.to_s + Label::DRAW_AT_LEAST_MIDFIX + at_least.to_s
+  end
+
   before(:each) do
     @deck = DeckBuilder.new JsonCollapser.new.decollapse(File.read PATH_TO_DEFAULT)
   end
@@ -162,6 +166,58 @@ describe ProbDecorator do
     decorated = decorator.full_deck
     expected_card = find_card_by_token(decorated[0], card_to_observe)
     expect(expected_card[Label::DRAW_PROB_PREFIX + "#{decorating_tag}"]).to eq(prob_of_drawing_at_least_one_of_two_left)
+  end
+
+  it "#decorate_at_least(draws=1, at_least=2) sets the probability of at_least_2 to 0 if only one is available" do
+    card_to_observe = "NY"
+    draws = 1
+    at_least = 2
+    @deck.move_to_discard card_to_observe
+    @deck.add_discard_to_deck
+    collapsed = collapse
+    decorator = ProbDecorator.new collapsed
+    decorator.decorate_at_least(draws=draws, at_least=at_least)
+    decorated = decorator.full_deck
+    expected_card = find_card_by_token(decorated[0], card_to_observe)
+    expect(expected_card[label_at_least(draws, at_least)]).to eq(0.0)
+  end
+
+  it "#decorate_at_least(draws=1, at_least=2 always adds 0.0" do
+    card_to_observe = "NY"
+    draws = 1
+    at_least = 2
+    collapsed = collapse
+    decorator = ProbDecorator.new collapsed
+    decorator.decorate_at_least(draws=draws, at_least=at_least)
+    decorated = decorator.full_deck
+    expected_card = find_card_by_token(decorated[0], card_to_observe)
+    expect(expected_card[label_at_least(draws, at_least)]).to eq(0.0)
+  end
+
+  it "#decorate_at_least(draws=2, at_least=3 always adds 0.0" do
+    card_to_observe = "NY"
+    draws = 2
+    at_least = 3
+    collapsed = collapse
+    decorator = ProbDecorator.new collapsed
+    decorator.decorate_at_least(draws=draws, at_least=at_least)
+    decorated = decorator.full_deck
+    expected_card = find_card_by_token(decorated[0], card_to_observe)
+    expect(expected_card[label_at_least(draws, at_least)]).to eq(0.0)
+  end
+
+  it "#decorate_at_least(draws=2, at_least=2) applies 1.0 when two are both the same" do
+    card_to_observe = "NY"
+    draws = 2
+    at_least = 2
+    draws.times { @deck.move_to_discard card_to_observe }
+    @deck.add_discard_to_deck
+    collapsed = collapse
+    decorator = ProbDecorator.new collapsed
+    decorator.decorate_at_least(draws=draws, at_least=at_least)
+    decorated = decorator.full_deck
+    expected_card = find_card_by_token(decorated[0], card_to_observe)
+    expect(expected_card[label_at_least(draws, at_least)]).to eq(1.0)
   end
 
 end
