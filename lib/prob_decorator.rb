@@ -34,6 +34,19 @@ class ProbDecorator
     return @deck
   end
 
+  def bin_co(n, r)
+    return 1 if r == 0 || r == n
+    return 0 if r > n
+    out = 1
+    upper = (r > (n - r)) ? r : n - r
+    lower = n - upper
+    (1..n).reverse_each do |i|
+       out = (out * i) if i > upper
+       out = (out / i) if i <= lower
+    end
+    out
+  end
+
   private
 
   def count_deck(deck)
@@ -96,4 +109,5 @@ class ProbDecorator
   def label_at_least(draws, at_least)
     "" + Label::DRAW_PROB_PREFIX + draws.to_s + Label::DRAW_AT_LEAST_MIDFIX + at_least.to_s
   end
+
 end

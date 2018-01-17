@@ -220,5 +220,65 @@ describe ProbDecorator do
     expect(expected_card[label_at_least(draws, at_least)]).to eq(1.0)
   end
 
+  it "#bin_co(3, 1) returns 3" do
+    n = 3
+    choose = 1
+    binom = 3
+    collapsed = collapse
+    decorator = ProbDecorator.new collapsed
+    bin = decorator.bin_co(n, choose)
+    expect(bin).to eq(binom)
+  end
+  
+  it "#bin_co(3, 2) returns 3" do
+    n = 3
+    choose = 2
+    binom = 3
+    collapsed = collapse
+    decorator = ProbDecorator.new collapsed
+    bin = decorator.bin_co(n, choose)
+    expect(bin).to eq(binom)
+  end
+
+  it "#bin_co(9, 2) returns 36" do
+    n = 9
+    choose = 2
+    binom = 36
+    collapsed = collapse
+    decorator = ProbDecorator.new collapsed
+    bin = decorator.bin_co(n, choose)
+    expect(bin).to eq(binom)
+  end
+
+  it "#bin_co(4, 5) returns 0" do
+    n = 4
+    choose = 5
+    binom = 0
+    collapsed = collapse
+    decorator = ProbDecorator.new collapsed
+    bin = decorator.bin_co(n, choose)
+    expect(bin).to eq(binom)
+  end
+
+  it "#bin_co(5, 5) returns 1" do
+    n = 5
+    choose = 5
+    binom = 1
+    collapsed = collapse
+    decorator = ProbDecorator.new collapsed
+    bin = decorator.bin_co(n, choose)
+    expect(bin).to eq(binom)
+  end
+
+  it "#bin_co(5, 4) returns 1" do
+    n = 5
+    choose = 4
+    binom = 5
+    collapsed = collapse
+    decorator = ProbDecorator.new collapsed
+    bin = decorator.bin_co(n, choose)
+    expect(bin).to eq(binom)
+  end
+
 end
 
